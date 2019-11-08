@@ -11,30 +11,35 @@ library(babynames)
 library(tidyverse)
 ```
 
-```{r}
-babynames %>%
+```{r include=FALSE}
+A <- babynames %>%
   distinct(year) %>%
   nrow()
 ```
 
-```{r}
-babynames %>%
+There are `r A` years worth of baby names in this data set. 
+
+```{r include=FALSE}
+B <- babynames %>%
   distinct(name) %>%
   nrow()
 ```
 
-```{r}
+There are `r B` unique baby names. 
+
+```{r names that come up the most, include=FALSE}
 babynames %>%
   group_by(name) %>%
   summarize(total = n()) %>%
-  arrange(desc(total))
+  arrange(desc(total)) 
 
 # 278 accounts for both male and female --> 134 Females and 134 males named francis, james...
 
 ```
 
 
-```{r}
+
+```{r make sure there was a female James, include=FALSE}
 babynames %>%
   filter(name == "James")
 
@@ -56,9 +61,9 @@ Emily %>%
 ```
 
 
-Male names that appear every year
 
-```{r}
+
+```{r include=FALSE}
 babynames %>%
   filter(sex == "M") %>%
   count(name) %>%
@@ -79,7 +84,7 @@ all_male_names <- babynames %>%
 
 
 
-```{r}
+```{r include=FALSE}
 one_name <- babynames %>%
   filter(name == "Brian", sex == "M")
 
@@ -90,7 +95,7 @@ lm.obj <- lm(data = one_name, prop ~ year)
 ```
 
 
-```{r}
+```{r include=FALSE}
 babynames %>%
   filter(name %in% all_male_names) %>%
   filter(sex == "M") %>%
